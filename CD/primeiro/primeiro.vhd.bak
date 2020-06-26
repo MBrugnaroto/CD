@@ -1,0 +1,52 @@
+entity primeiro is
+		port(
+				a, b: in std_logic_vector (3 downto 0;
+				sel: in std_logic_vector (1 downto 0);
+				sel1: in std_logic_vector (1 downto 0);
+				sel2: in std_logic_vector (1 downto 0);
+				s1: out std_logic_vector (3 downto 0);
+				s2: out std_logic_vector (3 downto 0);
+				s3: out std_logic_vector (3 downto 0);
+				carry: out std_logic;
+				
+				);
+		end ula;
+		
+	architecture arch_primeiro of primeiro is
+	
+	component full_adder4bits
+		port (
+						 a0,a1,a2,a3,b0,b1,b2,b3: in std_logic;
+						 s0,s1,s2,s3,count: out std_logic
+				);
+		end component;
+
+	
+	begin
+	
+	with sel select
+	
+	s1 <=
+	
+			"a" when "0"
+			"b" when "1"
+			"" when others; 
+	
+	with sel1 select		
+	s2 <= 
+			
+			   "b" when "0"
+			"0001" when "1"
+			"" when others;
+	
+	with sel2 select		
+	s3 <= 
+			
+			"not(s2)" when "0"
+			     "s2" when "1"
+			"" when others;	
+	
+	 Half1: full_adder4bits
+					port map(a0 => s1, b => s3, sum => s, count => carry);
+	
+	end arch_primeiro;
